@@ -1,0 +1,93 @@
+StateValue system and runtime summary
+Recorded: 2026-10-26
+
+Scope
+-----
+This file combines current workspace inspection with historical GPU snapshots.
+It is an environment record, not a tested clean-VM installation recipe.
+
+Current workspace: directly observed
+-----------------------------------
+OS: Ubuntu 22.04.5 LTS (Jammy)
+Architecture: x86_64
+Kernel: 6.8.0-1070-gcp
+Project directory: /home/max/statevalue (normally ~/statevalue)
+Virtual environment: <project>/.venv
+Python: CPython 3.12.15
+Environment manager: uv 0.13.1
+CUDA toolkit: 13.0, nvcc V13.0.88
+CUDA toolkit path: /usr/local/cuda-13.0
+Note: nvcc exists at that absolute path but was not on the inspection shell's PATH.
+      statevalue.sh prepends $CUDA_HOME/bin when launching workloads/services.
+
+Installed Python package metadata in .venv:
+  torch==2.13.0+cu130
+  vllm==0.30.0
+  lmcache==0.5.5
+  flashinfer-python==0.6.18.post1
+  numpy==2.2.6
+  zstandard==0.25.0
+These versions were read from package metadata; GPU execution was not tested.
+zstandard is required for compressed .jsonl.zst traces and is absent from the
+older requirements-lmcache-working.txt snapshot.
+
+Historical GPU snapshot: 2026-10-15
+-----------------------------------
+Source: gpu-environment.txt
+GPU: NVIDIA L4
+Reported GPU memory: 23034 MiB (about 22.5 GiB)
+NVIDIA driver: 615.71.09
+NVIDIA-SMI reported CUDA UMD version: 13.4
+The NVIDIA-SMI CUDA field is not the installed toolkit version; the separately
+captured nvcc output reports toolkit 13.0.
+
+Current GPU verification status
+-------------------------------
+/usr/bin/nvidia-smi is present, but the current inspection environment could not
+communicate with the NVIDIA driver. The historical GPU/driver values above were
+not independently confirmed live. This does not establish a fault on the user's
+running VM. Recheck nvidia-smi and GPU execution on the deployment VM.
+
+Project service settings: statevalue.sh
+--------------------------------------
+Model: Qwen/Qwen2.5-1.5B-Instruct
+Model revision: not pinned
+dtype: half (FP16)
+Maximum model length: 8192
+GPU memory utilization: 0.7
+Prefix caching: enabled
+Sampler: VLLM_USE_FLASHINFER_SAMPLER=1
+vLLM endpoint: 127.0.0.1:8000
+LMCache endpoint: 127.0.0.1:5555
+LMCache L1 size: 4 GB (CLI setting)
+LMCache eviction: LRU (CPU cache setting, not a GPU-retention baseline)
+LMCache chunk size: 16
+Connector: LMCacheMPConnector, kv_role=kv_both
+Connector module: lmcache.integration.vllm.lmcache_mp_connector
+
+Files and dependencies
+----------------------
+environment/requirements-lmcache-working.txt: later integrated package snapshot
+environment/requirements-vllm-working.txt: earlier package snapshot
+environment/requirements-deploy.txt: direct pins plus historical constraints
+environment/verify_deployment.py: package/import/CUDA validation
+setup.sh: user-space installation, dry-run and existing-environment checks
+DEPLOY.md: new-VM prerequisites and deployment procedure
+environment/gpu-environment.txt: historical NVIDIA-SMI output
+environment/cuda-toolkit-version.txt: historical nvcc output
+data/freeinference/: downloaded raw traces, excluded from Git
+runs/: replay plans and experiment results, excluded from Git
+logs/: service stdout/stderr, excluded from Git
+Shell utilities used by startup: bash, curl, tee, mktemp, date, mkdir
+Both services bind to loopback; the harness runs on the same VM.
+
+Still needed for reproducible deployment
+---------------------------------------
+- Exact base VM image and machine type, CPU/RAM/disk configuration.
+- System-package, NVIDIA driver, and CUDA installation commands/sources.
+- Clean-VM verification of the declared CUDA 13.0 package source and install flow.
+- Native wheel/build provenance beyond the installed package version records.
+- A complete dependency lock including the recent zstandard addition.
+- Pinned model revision and raw-trace checksums for each experiment.
+- Successful deployment on a clean VM, health/smoke checks, and KV restore check.
+Do not treat the current package snapshots alone as a reproducible installer.

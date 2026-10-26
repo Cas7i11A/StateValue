@@ -1,0 +1,10 @@
+# Direct runtime dependencies; constrain transitive versions to the working snapshot.
+# Install through setup.sh / uv with --torch-backend cu130 (not a plain pip command).
+# This is a constrained deployment manifest, not a hash-locked wheel archive.
+-c requirements-lmcache-working.txt
+torch==2.13.0+cu130
+vllm==0.30.0
+lmcache==0.5.5
+flashinfer-python==0.6.18.post1
+numpy==2.2.6
+zstandard==0.25.0

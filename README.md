@@ -10,6 +10,9 @@ For the controlled-capacity **native_lru_cpu_cache** baseline, sequential pressu
 probe, fixed prefix/length trace replay and cold-cache comparison procedure, see
 [BASELINE.md](BASELINE.md). The original gap-only harness remains available for
 smoke checks; it does not preserve trace lengths or block-prefix structure.
+The matched 256 MiB no-CPU control retains GPU prefix caching and disables the
+LMCache connector through `--cpu-cache none`; see
+[CPU_CACHE_ABLATION.md](CPU_CACHE_ABLATION.md) for commands and interpretation.
 
 ## Current status
 
@@ -29,6 +32,10 @@ Validated so far:
   in both runs; the large control restored zero. All three runs completed 106/106
   requests with zero active-request preemptions. See the
   [acceptance record](experiments/native_lru_cpu_cache.md).
+- A matched 256 MiB no-CPU control and one repeat per arm passed (106/106
+  requests per trace run, zero active preemptions). The long-prefix probe favored
+  CPU restoration, but the scaled trace showed no overall latency advantage for
+  the CPU tier. See the [CPU-cache ablation record](experiments/cpu_cache_ablation.md).
 
 Not yet validated:
 
@@ -52,9 +59,11 @@ statevalue/
 ├── setup.sh                          # New-VM environment installation and validation
 ├── DEPLOY.md                         # Prerequisites and deployment steps
 ├── BASELINE.md                       # Native block LRU + CPU-cache acceptance procedure
+├── CPU_CACHE_ABLATION.md             # Same-GPU-budget CPU-tier ablation
 ├── baseline_workload.py              # Frozen pressure and trace-prefix workloads
 ├── baseline_run.py                   # Cold services, replay, metrics and acceptance
 ├── baseline_compare.py               # Matched-capacity and repeat checks
+├── cpu_cache_compare.py              # CPU-tier matching and request-level effects
 ├── experiments/                      # Small, versioned acceptance notes/results
 ├── tool_gap_harness.py
 ├── trace_workload.py                 # FreeInference raw-trace converter and plan reader

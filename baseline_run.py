@@ -23,7 +23,8 @@ from trace_workload import file_sha256
 ROOT = Path(__file__).resolve().parent
 URL = "http://127.0.0.1:8000"
 METRICS = ("vllm:num_preemptions_total", "vllm:prefix_cache_hits_total",
-           "vllm:external_prefix_cache_hits_total", "vllm:kv_cache_usage_perc")
+           "vllm:external_prefix_cache_hits_total", "vllm:kv_cache_usage_perc",
+           "vllm:request_prefill_kv_computed_tokens_sum")
 
 
 def utc():
@@ -67,8 +68,9 @@ def port_busy(port):
 
 class Services:
     """Own only the processes started here; never stop a preexisting service."""
-    def __init__(self, out, kv_bytes, revision):
+    def __init__(self, out, kv_bytes, revision, cpu_cache="lmcache"):
         self.out, self.kv_bytes, self.revision = out, kv_bytes, revision
+        self.cpu_cache = cpu_cache
         self.processes = []
 
     def launch(self, name):
@@ -76,6 +78,7 @@ class Services:
                    STATEVALUE_LOG_DIR=str(self.out / "services"),
                    STATEVALUE_KV_CACHE_BYTES=str(self.kv_bytes),
                    STATEVALUE_MODEL_REVISION=self.revision,
+                   STATEVALUE_CPU_CACHE=self.cpu_cache,
                    PYTHONUNBUFFERED="1")
         proc = subprocess.Popen(["bash", str(ROOT / "statevalue.sh"), name], env=env,
                                 stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT,
@@ -184,7 +187,7 @@ def replay(plan, out, services, clients, time_scale, socket_timeout):
                     row["start_s"] = time.perf_counter() - start
                     log("request_start", **row, expected_prompt_tokens=len(tokens))
                     # Probe requests are serial, so this log range belongs to this request.
-                    lmcache_log = services.log("lmcache") if is_probe else None
+                    lmcache_log = services.log("lmcache") if services.cpu_cache == "lmcache" and (is_probe or clients == 1) else None
                     offset = lmcache_log.stat().st_size if lmcache_log else None
                     try:
                         result = stream_request(URL, plan["model"]["name"], [], 32, socket_timeout,
@@ -201,8 +204,10 @@ def replay(plan, out, services, clients, time_scale, socket_timeout):
                     except Exception as exc:
                         row["error"] = f"{type(exc).__name__}: {exc}"
                         log("request_error", **row)
-                    if lmcache_log:
+                    if is_probe:
                         time.sleep(.3)
+                    row["retrieved_tokens"] = None
+                    if lmcache_log:
                         with lmcache_log.open("rb") as stream:
                             stream.seek(offset)
                             row["retrieved_tokens"] = retrieved_tokens(stream.read().decode(errors="replace"))
@@ -248,9 +253,19 @@ def provenance():
     return record
 
 
-def acceptance(summary, expectation, kind):
+def acceptance(summary, expectation, kind, cpu_cache="lmcache"):
     checks = dict(all_requests_successful=summary["successful_requests"] == summary["expected_requests"],
                   no_active_request_preemption=summary["preemptions_delta"] == 0)
+    if cpu_cache == "none":
+        checks.update(no_connector=summary["connector_disabled"], no_lmcache_service=not summary["lmcache_started"],
+                      gpu_prefix_caching_enabled=summary["gpu_prefix_caching_enabled"])
+        if kind == "pressure_probe" and expectation == "pressure":
+            checks["pushers_exceed_gpu_capacity"] = summary["pusher_tokens"] > summary["gpu_capacity_tokens"]
+            checks["prefill_computation_measured"] = (summary["prefill_kv_computed_tokens_delta"] or 0) > 0
+        elif expectation == "no-pressure":
+            checks["gpu_prefix_reuse"] = (summary["prefix_hit_tokens_delta"] or 0) > 0
+        return dict(passed=all(checks.values()), checks=checks,
+                    note="No CPU tier: missing GPU prefixes are computed; retrieval is not applicable.")
     if kind == "pressure_probe":
         row = summary["probe_a_repeat"] or {}
         if expectation == "pressure":
@@ -274,6 +289,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plan", type=Path, required=True)
     parser.add_argument("--gpu-kv-bytes", type=int, required=True)
+    parser.add_argument("--cpu-cache", choices=["lmcache", "none"], default="lmcache")
     parser.add_argument("--expect", choices=["pressure", "no-pressure"], required=True)
     parser.add_argument("--clients", type=int, default=1)
     parser.add_argument("--time-scale", type=float, default=1)
@@ -297,19 +313,24 @@ def main():
     (out / "source").mkdir()
     for name in provenance()["source_sha256"]:
         shutil.copyfile(ROOT / name, out / "source" / name)
-    config = dict(baseline=BASELINE, workload_sha256=file_sha256(args.plan), seed=plan["seed"],
-                  gpu_kv_bytes=args.gpu_kv_bytes, cpu_cache_bytes=CPU_BYTES, cpu_eviction="LRU",
+    enabled = args.cpu_cache == "lmcache"
+    baseline = BASELINE if enabled else "native_lru_no_cpu_cache"
+    config = dict(baseline=baseline, workload_sha256=file_sha256(args.plan), seed=plan["seed"],
+                  gpu_kv_bytes=args.gpu_kv_bytes, cpu_cache_bytes=CPU_BYTES if enabled else 0,
+                  cpu_cache_mode=args.cpu_cache, cpu_eviction="LRU" if enabled else None,
+                  kv_connector="LMCacheMPConnector" if enabled else None, gpu_prefix_caching=True,
                   gpu_eviction="vLLM native block-level LRU", ttl=None, predictor=None,
                   model=plan["model"], clients=args.clients, time_scale=args.time_scale,
                   output_tokens=32, ignore_eos=True, min_tokens=32, cold_start=True,
                   expectation=args.expect, started=utc(), **provenance())
     write_json(out / "config.json", config)
-    services = Services(out, args.gpu_kv_bytes, plan["model"]["revision"])
+    services = Services(out, args.gpu_kv_bytes, plan["model"]["revision"], args.cpu_cache)
     metrics = Metrics(out)
     try:
         print(f"Starting cold services: GPU KV {args.gpu_kv_bytes} bytes; logs: {out / 'services'}", flush=True)
-        services.launch("lmcache")
-        services.wait_ready("lmcache")
+        if enabled:
+            services.launch("lmcache")
+            services.wait_ready("lmcache")
         services.launch("vllm")
         services.wait_ready("vllm")
         vllm_log = services.log("vllm").read_text(errors="replace")
@@ -331,10 +352,16 @@ def main():
         summary = replay(plan, out, services, args.clients, args.time_scale, args.socket_timeout)
         time.sleep(2)  # Let asynchronous metric/log updates settle before the final snapshot.
         after = metrics.snapshot("after")
-        cpu_log = services.log("lmcache").read_text(errors="replace")
-        summary.update(baseline=BASELINE, workload_sha256=config["workload_sha256"],
-                       gpu_kv_bytes=args.gpu_kv_bytes, gpu_capacity_tokens=capacity, cpu_cache_bytes=CPU_BYTES,
-                       retrieved_tokens=retrieved_tokens(cpu_log),
+        cpu_log = services.log("lmcache").read_text(errors="replace") if enabled else None
+        summary.update(baseline=baseline, workload_sha256=config["workload_sha256"],
+                       gpu_kv_bytes=args.gpu_kv_bytes, gpu_capacity_tokens=capacity,
+                       cpu_cache_bytes=config["cpu_cache_bytes"], cpu_cache_mode=args.cpu_cache,
+                       connector_disabled="LMCacheMPConnector" not in vllm_log,
+                       lmcache_started=any(name == "lmcache" for name, _ in services.processes),
+                       gpu_prefix_caching_enabled=("enable_prefix_caching': True" in vllm_log or "enable_prefix_caching=True" in vllm_log),
+                       retrieved_tokens=retrieved_tokens(cpu_log) if enabled else None,
+                       retrieval_status="measured_from_lmcache_log" if enabled else "not_applicable_cpu_cache_disabled",
+                       prefill_kv_computed_tokens_delta=delta(before, after, "vllm:request_prefill_kv_computed_tokens_sum"),
                        preemptions_delta=delta(before, after, "vllm:num_preemptions_total"),
                        prefix_hit_tokens_delta=delta(before, after, "vllm:prefix_cache_hits_total"),
                        eviction_count=None, transfer_bytes=None, lru_order_verified=False,
@@ -346,7 +373,7 @@ def main():
         if plan["kind"] == "pressure_probe":
             summary.update(pusher_tokens=plan["pressure"]["pusher_unique_full_tokens"],
                            probe_unique_tokens=plan["pressure"]["total_unique_prompt_tokens"])
-        summary["acceptance"] = acceptance(summary, args.expect, plan["kind"])
+        summary["acceptance"] = acceptance(summary, args.expect, plan["kind"], args.cpu_cache)
         write_json(out / "summary.json", summary)
         print(json.dumps(summary, indent=2), flush=True)
         return 0 if summary["acceptance"]["passed"] else 1

@@ -26,6 +26,7 @@ LMCache and vLLM output is shown in the terminal and saved under logs/.
 Override the project directory with STATEVALUE_DIR if needed.
 Set STATEVALUE_KV_CACHE_BYTES to bound the vLLM KV pool (e.g. 268435456).
 Set STATEVALUE_LOG_DIR to save service logs in a specific experiment directory.
+Set STATEVALUE_CPU_CACHE=none for GPU prefix caching without LMCache (default: lmcache).
 EOF
 }
 
@@ -87,6 +88,22 @@ case "$action" in
   vllm)
     kv_args=()
     revision_args=()
+    connector_args=()
+    case "${STATEVALUE_CPU_CACHE:-lmcache}" in
+      lmcache)
+        connector_args=(--kv-transfer-config '{
+          "kv_connector": "LMCacheMPConnector",
+          "kv_connector_module_path": "lmcache.integration.vllm.lmcache_mp_connector",
+          "kv_role": "kv_both",
+          "kv_connector_extra_config": {
+            "lmcache.mp.host": "127.0.0.1",
+            "lmcache.mp.port": 5555
+          }
+        }')
+        ;;
+      none) echo 'CPU cache disabled; GPU prefix caching remains enabled.' ;;
+      *) echo 'STATEVALUE_CPU_CACHE must be lmcache or none.' >&2; exit 2 ;;
+    esac
     if [[ -n "${STATEVALUE_MODEL_REVISION:-}" ]]; then
       revision_args=(--revision "$STATEVALUE_MODEL_REVISION" --tokenizer-revision "$STATEVALUE_MODEL_REVISION")
     fi
@@ -108,15 +125,7 @@ case "$action" in
       --enable-prefix-caching \
       "${kv_args[@]}" \
       "${revision_args[@]}" \
-      --kv-transfer-config '{
-        "kv_connector": "LMCacheMPConnector",
-        "kv_connector_module_path": "lmcache.integration.vllm.lmcache_mp_connector",
-        "kv_role": "kv_both",
-        "kv_connector_extra_config": {
-          "lmcache.mp.host": "127.0.0.1",
-          "lmcache.mp.port": 5555
-        }
-      }'
+      "${connector_args[@]}"
     ;;
   smoke)
     check_health

@@ -103,6 +103,14 @@ class MeasurementTest(unittest.TestCase):
         summary["preemptions_delta"] = None
         self.assertFalse(acceptance(summary, "pressure", "pressure_probe")["passed"])
 
+    def test_no_cpu_acceptance_requires_disabled_connector_and_measured_compute(self):
+        summary = dict(successful_requests=5, expected_requests=5, preemptions_delta=0,
+                       connector_disabled=True, lmcache_started=False, gpu_prefix_caching_enabled=True,
+                       pusher_tokens=12288, gpu_capacity_tokens=9360, prefill_kv_computed_tokens_delta=20496)
+        self.assertTrue(acceptance(summary, "pressure", "pressure_probe", "none")["passed"])
+        summary["lmcache_started"] = True
+        self.assertFalse(acceptance(summary, "pressure", "pressure_probe", "none")["passed"])
+
     def test_raw_token_requests_force_exact_generation_length_and_seed(self):
         chunk = dict(id="test", choices=[dict(text="hello", finish_reason="length")],
                      usage=dict(prompt_tokens=3, completion_tokens=32))
@@ -137,6 +145,15 @@ class ServiceLaunchTest(unittest.TestCase):
             self.assertIn("--kv-cache-memory-bytes\n268435456", result.stdout)
             self.assertIn("--revision\npinned-revision", result.stdout)
             self.assertIn("--tokenizer-revision\npinned-revision", result.stdout)
+            self.assertIn("--kv-transfer-config", result.stdout)
+            env["STATEVALUE_CPU_CACHE"] = "none"
+            result = subprocess.run(["bash", str(root / "statevalue.sh"), "vllm"], env=env,
+                                    capture_output=True, text=True, timeout=5)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertNotIn("--kv-transfer-config", result.stdout)
+            self.assertNotIn("LMCacheMPConnector", result.stdout)
+            self.assertIn("--enable-prefix-caching", result.stdout)
+            self.assertIn("--kv-cache-memory-bytes\n268435456", result.stdout)
             env["STATEVALUE_KV_CACHE_BYTES"] = "0"
             result = subprocess.run(["bash", str(root / "statevalue.sh"), "vllm"], env=env,
                                     capture_output=True, text=True, timeout=5)

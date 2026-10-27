@@ -6,6 +6,11 @@ StateValue investigates when an LLM serving system should retain idle KV state o
 z
 The current prototype runs vLLM with an independent LMCache service and a synthetic tool-gap harness. Policy development and evaluation under memory pressure are ongoing.
 
+For the controlled-capacity **native_lru_cpu_cache** baseline, sequential pressure
+probe, fixed prefix/length trace replay and cold-cache comparison procedure, see
+[BASELINE.md](BASELINE.md). The original gap-only harness remains available for
+smoke checks; it does not preserve trace lengths or block-prefix structure.
+
 ## Current status
 
 Validated so far:
@@ -14,14 +19,27 @@ Validated so far:
 - KV storage through LMCache and restoration after restarting vLLM while keeping LMCache running (`Retrieved 96 tokens` observed).
 - A synthetic workload with four concurrent contexts, three requests per context, and two simulated tool waits per context.
 - Service startup through `statevalue.sh`, including automatic virtual-environment activation and an HTTP health check.
+- `native_lru_cpu_cache` sequential pressure probe: 256 MiB GPU KV capacity,
+  4 GiB CPU cache, and a repeated 4096-token prefix restored from CPU after
+  pressure; the matched 12 GiB control reused that prefix on GPU without restore.
+- A frozen 24-session, 106-request trace-driven synthetic replay under both GPU
+  budgets, with fixed seed/output lengths, preserved scaled prefix structure,
+  cold service starts and recorded metrics. See [BASELINE.md](BASELINE.md).
+- A same-budget cold repeat passed. The small-pool trace restored 21,408 tokens
+  in both runs; the large control restored zero. All three runs completed 106/106
+  requests with zero active-request preemptions. See the
+  [acceptance record](experiments/native_lru_cpu_cache.md).
 
 Not yet validated:
 
-- GPU eviction and CPU restoration under controlled KV memory pressure.
-- An end-to-end LRU performance baseline or comparisons against TTL/value-based policies.
+- Exact block eviction counts/order and measured transfer bytes.
+- Comparisons against TTL/value-based policies or performance improvements from StateValue.
 - Real coding-agent task success or goodput.
 
-LMCache currently uses LRU for its CPU cache. This setting alone does not establish the project's GPU retention baseline.
+LMCache uses LRU for its CPU cache. The named baseline additionally uses vLLM's
+unmodified block-level GPU prefix-cache LRU under explicit KV budgets; CPU LRU
+alone does not establish that GPU behavior. The trace experiment scales source
+lengths by 1/16 and time by 0.001; it does not reproduce original prompt semantics.
 
 ## Files
 
@@ -33,9 +51,16 @@ statevalue/
 ├── statevalue.sh
 ├── setup.sh                          # New-VM environment installation and validation
 ├── DEPLOY.md                         # Prerequisites and deployment steps
+├── BASELINE.md                       # Native block LRU + CPU-cache acceptance procedure
+├── baseline_workload.py              # Frozen pressure and trace-prefix workloads
+├── baseline_run.py                   # Cold services, replay, metrics and acceptance
+├── baseline_compare.py               # Matched-capacity and repeat checks
+├── experiments/                      # Small, versioned acceptance notes/results
 ├── tool_gap_harness.py
 ├── trace_workload.py                 # FreeInference raw-trace converter and plan reader
 ├── tests/
+│   ├── test_baseline.py               # Frozen workloads, capacity and acceptance checks
+│   ├── test_setup.py                  # Offline deployment control-flow checks
 │   └── test_trace_replay.py           # CPU-only converter and replay checks
 ├── environment/                      # Historical working-environment snapshots
 │   ├── requirements-lmcache-working.txt

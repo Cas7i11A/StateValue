@@ -1,0 +1,166 @@
+{
+  "baseline": "native_lru_cpu_cache",
+  "checks": {
+    "matched_inputs_and_settings": true,
+    "different_gpu_budgets": true,
+    "both_cold_started": true,
+    "small_accepted": true,
+    "large_accepted": true,
+    "small_restored": true,
+    "more_restore_under_small_budget": true,
+    "repeat_matches_fixed_budget": true,
+    "repeat_cold_and_accepted": true
+  },
+  "comparison_passed": true,
+  "repeatability_verified": true,
+  "baseline_acceptance_complete": true,
+  "rows": [
+    {
+      "path": "runs/native_lru_cpu_cache/trace-small-01",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.04161799350004003,
+      "ttft_p95_s": 0.28200080450000087,
+      "latency_p50_s": 0.4584794625000086,
+      "latency_p95_s": 0.7487012167499643,
+      "wall_time_s": 85.87333949499998,
+      "retrieved_tokens": 21408,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    },
+    {
+      "path": "runs/native_lru_cpu_cache/trace-large-01",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 12884901888,
+      "gpu_capacity_tokens": 449376,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.03557991500008484,
+      "ttft_p95_s": 0.2792110022500083,
+      "latency_p50_s": 0.4550799895000637,
+      "latency_p95_s": 0.7424458762499739,
+      "wall_time_s": 85.68689764800001,
+      "retrieved_tokens": 0,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    },
+    {
+      "path": "runs/native_lru_cpu_cache/trace-small-02",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.042193482500124446,
+      "ttft_p95_s": 0.28134810450023906,
+      "latency_p50_s": 0.45819768849992215,
+      "latency_p95_s": 0.7484990689999904,
+      "wall_time_s": 85.89793493900015,
+      "retrieved_tokens": 21408,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    }
+  ],
+  "limitations": [
+    "Exact block LRU order is not verified",
+    "Eviction count and transfer bytes are unmeasured",
+    "Synthetic token contents; scaled source lengths; client TTFT is not pure restore time"
+  ],
+  "workload": {
+    "sha256": "11a0a73e1c77632346c93865a54cb3e22a28b23681b0a9dfe56584ce83acbb9b",
+    "seed": 42,
+    "model": {
+      "name": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "dtype": "half",
+      "tensor_parallel_size": 1,
+      "kv_bytes_per_token": 28672,
+      "tokenizer_vocab_sha256": "3b15706f4d44a6e9298fb9659de247fc7a1afb59c6989b184fbb354e8332dd60"
+    },
+    "source_files": [
+      {
+        "path": "data/freeinference/2026-05-17.jsonl.zst",
+        "sha256": "f768c3a44d6c7eb02340adcb7bceaf5a451e20dc568d7a96d69f78bfb70e09a8"
+      }
+    ],
+    "selection": {
+      "selected_sessions": 24,
+      "unique_source_sessions": 24,
+      "eligible_segments": 81,
+      "max_requests": 5,
+      "min_requests": 3,
+      "excluded": {
+        "too_short": 38
+      },
+      "excluded_transitions": {
+        "not_serial_tool_chain": 125,
+        "model_or_provider_change": 1
+      }
+    },
+    "length_mapping": {
+      "tokens_per_source_block": 1,
+      "source_tokens_per_block": 16,
+      "scale": 0.0625,
+      "partial_source_blocks": "not released; omitted",
+      "overflow": "exclude segment; no truncation",
+      "note": "One tool-chain segment per source session; original text/semantics unavailable."
+    },
+    "clients": 1,
+    "time_scale": 0.001,
+    "output_tokens": 32,
+    "measurement_base_commit": "aba98b66affbf5fd5b1df4e15b2d09138a25acd5",
+    "measurement_working_tree_status": "M README.md\n M statevalue.sh\n M tool_gap_harness.py\n?? BASELINE.md\n?? baseline_compare.py\n?? baseline_run.py\n?? baseline_workload.py\n?? tests/test_baseline.py",
+    "runtime_source_sha256": {
+      "statevalue.sh": "7b69dce0e3d54350ef5b92774a19b8efdd127b3318faf64bda4bfb0a80feb7c1",
+      "baseline_run.py": "077303acbc656164f7c064dc4c70b790e874695ad492da67715652d8afea65ea",
+      "baseline_workload.py": "8e8a7c3645214b46ede8c9750eb304469184107591d9a3b26ff1bf8358b935d2",
+      "tool_gap_harness.py": "4ab1c0464b2a60234749fca219b01f7af9fe3a805a089afcde0509d7739b9c62",
+      "trace_workload.py": "b60f1bb7605b18abd1145216c37856cd286ec0f2fb7db2def2a2ef66b20f70fa"
+    }
+  },
+  "probe": {
+    "workload_sha256": "8b16fb08e7732c4cd46255e7a7832be0ecdf2d0795e142319377fe9ff4c28d4f",
+    "small_a_repeat": {
+      "session_id": "probe",
+      "step": 4,
+      "label": "A_repeat",
+      "prompt_sha256": "f2bb948002b9b22d5766431d5bbb1959e657ec7593d2f9a75cbbae3acd7cebb8",
+      "ok": true,
+      "client_queue_s": 1.0435000149300322e-05,
+      "start_s": 5.2356225180001275,
+      "request_latency_s": 0.4851876349998747,
+      "ttft_s": 0.06566562900002282,
+      "prompt_tokens": 4112,
+      "completion_tokens": 32,
+      "cached_tokens": null,
+      "finish_reason": "length",
+      "request_id": "cmpl-b03b12df7500ccc2",
+      "retrieved_tokens": 4096,
+      "end_s": 6.021903183000177
+    },
+    "large_a_repeat": {
+      "session_id": "probe",
+      "step": 4,
+      "label": "A_repeat",
+      "prompt_sha256": "f2bb948002b9b22d5766431d5bbb1959e657ec7593d2f9a75cbbae3acd7cebb8",
+      "ok": true,
+      "client_queue_s": 8.508999826517538e-06,
+      "start_s": 5.220908417000146,
+      "request_latency_s": 0.46105505100013033,
+      "ttft_s": 0.04060041100001399,
+      "prompt_tokens": 4112,
+      "completion_tokens": 32,
+      "cached_tokens": null,
+      "finish_reason": "length",
+      "request_id": "cmpl-b60114c7ad047667",
+      "retrieved_tokens": 0,
+      "end_s": 5.9829676869999275
+    }
+  }
+}

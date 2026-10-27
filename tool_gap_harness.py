@@ -26,11 +26,21 @@ def percentile(values, quantile):
     return values[lo] + (values[hi] - values[lo]) * (pos - lo)
 
 
-def stream_request(url, model, messages, max_tokens, socket_timeout):
+def stream_request(url, model, messages, max_tokens, socket_timeout, *,
+                   prompt_token_ids=None, seed=None, fixed_output=False):
     payload = dict(model=model, messages=messages, temperature=0,
                    max_tokens=max_tokens, stream=True,
                    stream_options={"include_usage": True})
-    req = urllib.request.Request(url + "/v1/chat/completions",
+    endpoint = "/v1/chat/completions"
+    if prompt_token_ids is not None:
+        payload.pop("messages")
+        payload["prompt"] = prompt_token_ids
+        endpoint = "/v1/completions"
+    if seed is not None:
+        payload["seed"] = seed
+    if fixed_output:
+        payload.update(min_tokens=max_tokens, ignore_eos=True)
+    req = urllib.request.Request(url + endpoint,
                                  data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json"})
     start = time.perf_counter()
@@ -52,7 +62,7 @@ def stream_request(url, model, messages, max_tokens, socket_timeout):
             if chunk.get("usage"):
                 usage = chunk["usage"]
             for choice in chunk.get("choices", []):
-                content = choice.get("delta", {}).get("content")
+                content = choice.get("text") if prompt_token_ids is not None else choice.get("delta", {}).get("content")
                 if content:
                     if first_text is None:
                         first_text = time.perf_counter() - start

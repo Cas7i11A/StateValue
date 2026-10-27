@@ -24,6 +24,8 @@ Finally stop the VM in GCP; closing SSH does not stop the VM.
 Smoke uses the existing tool_gap_harness.py; it is not included here.
 LMCache and vLLM output is shown in the terminal and saved under logs/.
 Override the project directory with STATEVALUE_DIR if needed.
+Set STATEVALUE_KV_CACHE_BYTES to bound the vLLM KV pool (e.g. 268435456).
+Set STATEVALUE_LOG_DIR to save service logs in a specific experiment directory.
 EOF
 }
 
@@ -63,13 +65,14 @@ export CUDA_HOME="${CUDA_HOME:-/usr/local/cuda-13.0}"
 export PATH="$CUDA_HOME/bin:$PATH"
 
 if [[ "$action" == lmcache || "$action" == vllm ]]; then
-  mkdir -p logs
-  log_file=$(mktemp "logs/${action}-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX.log")
+  log_dir="${STATEVALUE_LOG_DIR:-$project_dir/logs}"
+  mkdir -p "$log_dir"
+  log_file=$(mktemp "$log_dir/${action}-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX.log")
   # Keep exec below: the service remains the foreground process and receives
   # Ctrl+C directly. Let tee drain the pipe even when the terminal sends SIGINT.
   exec > >(trap '' INT; exec tee -a "$log_file") 2>&1
   export PYTHONUNBUFFERED=1
-  echo "Log: $project_dir/$log_file (UTC filename)"
+  echo "Log: $log_file (UTC filename)"
 fi
 
 case "$action" in
@@ -82,6 +85,19 @@ case "$action" in
       --chunk-size 16
     ;;
   vllm)
+    kv_args=()
+    revision_args=()
+    if [[ -n "${STATEVALUE_MODEL_REVISION:-}" ]]; then
+      revision_args=(--revision "$STATEVALUE_MODEL_REVISION" --tokenizer-revision "$STATEVALUE_MODEL_REVISION")
+    fi
+    if [[ -n "${STATEVALUE_KV_CACHE_BYTES:-}" ]]; then
+      if [[ ! "$STATEVALUE_KV_CACHE_BYTES" =~ ^[1-9][0-9]*$ ]]; then
+        echo 'STATEVALUE_KV_CACHE_BYTES must be a positive integer in bytes.' >&2
+        exit 2
+      fi
+      kv_args=(--kv-cache-memory-bytes "$STATEVALUE_KV_CACHE_BYTES")
+      echo "GPU KV pool: $STATEVALUE_KV_CACHE_BYTES bytes"
+    fi
     export VLLM_USE_FLASHINFER_SAMPLER=1
     exec vllm serve Qwen/Qwen2.5-1.5B-Instruct \
       --host 127.0.0.1 \
@@ -90,6 +106,8 @@ case "$action" in
       --max-model-len 8192 \
       --gpu-memory-utilization 0.7 \
       --enable-prefix-caching \
+      "${kv_args[@]}" \
+      "${revision_args[@]}" \
       --kv-transfer-config '{
         "kv_connector": "LMCacheMPConnector",
         "kv_connector_module_path": "lmcache.integration.vllm.lmcache_mp_connector",

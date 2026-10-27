@@ -386,10 +386,3 @@ logs/
 ```
 
 Ignored experiment outputs are not backed up by `git push`. Preserve important raw results separately; commit selected small tables, plots, and analysis when appropriate.
-
-## Next steps
-
-1. Bound the GPU KV pool and verify observable eviction and CPU restoration.
-2. Establish reproducible LRU and fixed-TTL baselines with matched budgets.
-3. Implement retention decisions that consider tool-return uncertainty and memory pressure.
-4. Evaluate latency, task success, memory usage, and transfer cost using controlled and measured tool gaps.

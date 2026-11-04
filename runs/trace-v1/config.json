@@ -1,0 +1,22 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "clients": 4,
+  "rounds": null,
+  "gap_seconds": null,
+  "prefix_lines": 32,
+  "max_tokens": 64,
+  "trace_plan": "runs/plans/trace-v1.json",
+  "time_scale": 0.01,
+  "socket_timeout": 120.0,
+  "output": "runs/trace-v1",
+  "run_id": "20261026T162941Z-b2e40a03",
+  "workload": "trace_gap_closed_loop",
+  "python_version": "3.12.15",
+  "ttft_definition": "client elapsed time to first nonempty content chunk",
+  "request_seed": null,
+  "task_success_metric": false,
+  "trace_plan_sha256": "0370d28705e1823d41a621252e832134c10f90cbd88693ecca5409d03548131c",
+  "session_count": 32,
+  "scheduling": "closed-loop; clients limits in-flight requests, not live sessions"
+}

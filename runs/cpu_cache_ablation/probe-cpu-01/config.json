@@ -1,0 +1,39 @@
+{
+  "baseline": "native_lru_cpu_cache",
+  "workload_sha256": "8b16fb08e7732c4cd46255e7a7832be0ecdf2d0795e142319377fe9ff4c28d4f",
+  "seed": 42,
+  "gpu_kv_bytes": 268435456,
+  "cpu_cache_bytes": 4294967296,
+  "cpu_cache_mode": "lmcache",
+  "cpu_eviction": "LRU",
+  "kv_connector": "LMCacheMPConnector",
+  "gpu_prefix_caching": true,
+  "gpu_eviction": "vLLM native block-level LRU",
+  "ttl": null,
+  "predictor": null,
+  "model": {
+    "name": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "dtype": "half",
+    "tensor_parallel_size": 1,
+    "kv_bytes_per_token": 28672,
+    "tokenizer_vocab_sha256": "3b15706f4d44a6e9298fb9659de247fc7a1afb59c6989b184fbb354e8332dd60"
+  },
+  "clients": 1,
+  "time_scale": 1,
+  "output_tokens": 32,
+  "ignore_eos": true,
+  "min_tokens": 32,
+  "cold_start": true,
+  "expectation": "pressure",
+  "started": "2026-10-27T01:27:16.061585+00:00",
+  "source_sha256": {
+    "statevalue.sh": "82be2398a763177aa764cce094d6b97519af7d8862c9ee91ac1022f1b3d99401",
+    "baseline_run.py": "0a3ebdd2c7296630ee7d5a97f84fb573058d12edfad116dc653da1ac327283f8",
+    "baseline_workload.py": "8e8a7c3645214b46ede8c9750eb304469184107591d9a3b26ff1bf8358b935d2",
+    "tool_gap_harness.py": "4ab1c0464b2a60234749fca219b01f7af9fe3a805a089afcde0509d7739b9c62",
+    "trace_workload.py": "b60f1bb7605b18abd1145216c37856cd286ec0f2fb7db2def2a2ef66b20f70fa"
+  },
+  "commit": "957ccf2717965f5b5335a1af134c6c8a1bf3bf15",
+  "working_tree_status": "M baseline_run.py\n M statevalue.sh\n M tests/test_baseline.py\n?? cpu_cache_compare.py"
+}

@@ -1,0 +1,75 @@
+{
+  "baseline": "native_lru_cpu_cache",
+  "checks": {
+    "matched_inputs_and_settings": true,
+    "different_gpu_budgets": true,
+    "both_cold_started": true,
+    "small_accepted": true,
+    "large_accepted": true,
+    "small_restored": true,
+    "more_restore_under_small_budget": true,
+    "repeat_matches_fixed_budget": true,
+    "repeat_cold_and_accepted": true
+  },
+  "comparison_passed": true,
+  "repeatability_verified": true,
+  "baseline_acceptance_complete": true,
+  "rows": [
+    {
+      "path": "runs/native_lru_cpu_cache/trace-small-01",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.04161799350004003,
+      "ttft_p95_s": 0.28200080450000087,
+      "latency_p50_s": 0.4584794625000086,
+      "latency_p95_s": 0.7487012167499643,
+      "wall_time_s": 85.87333949499998,
+      "retrieved_tokens": 21408,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    },
+    {
+      "path": "runs/native_lru_cpu_cache/trace-large-01",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 12884901888,
+      "gpu_capacity_tokens": 449376,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.03557991500008484,
+      "ttft_p95_s": 0.2792110022500083,
+      "latency_p50_s": 0.4550799895000637,
+      "latency_p95_s": 0.7424458762499739,
+      "wall_time_s": 85.68689764800001,
+      "retrieved_tokens": 0,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    },
+    {
+      "path": "runs/native_lru_cpu_cache/trace-small-02",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.042193482500124446,
+      "ttft_p95_s": 0.28134810450023906,
+      "latency_p50_s": 0.45819768849992215,
+      "latency_p95_s": 0.7484990689999904,
+      "wall_time_s": 85.89793493900015,
+      "retrieved_tokens": 21408,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    }
+  ],
+  "limitations": [
+    "Exact block LRU order is not verified",
+    "Eviction count and transfer bytes are unmeasured",
+    "Synthetic token contents; scaled source lengths; client TTFT is not pure restore time"
+  ]
+}

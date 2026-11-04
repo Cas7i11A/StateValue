@@ -1,0 +1,15 @@
+{
+  "workload": "trace_gap_closed_loop",
+  "output": "runs/trace-v1",
+  "attempted_requests": 181,
+  "successful_requests": 181,
+  "failed_requests": 0,
+  "completed_contexts": 32,
+  "wall_time_s": 437.68596045199956,
+  "successful_requests_per_s": 0.4135385101525321,
+  "mean_successful_request_latency_s": 0.5631864300663055,
+  "p95_successful_request_latency_s": 0.9747325689995705,
+  "p95_successful_request_ttft_s": 0.1053856309999901,
+  "length_limited_requests": 25,
+  "note": "Request throughput is not task goodput; latency excludes failed requests. TTFT includes HTTP, queueing, prefill/restore and first-token delivery. No separate queueing or GPU/CPU transfer timing is measured."
+}

@@ -1,0 +1,92 @@
+{
+  "comparison": "gpu_lru_cpu_cache_ablation",
+  "gpu_kv_bytes": 268435456,
+  "checks": {
+    "matched_workload_and_runtime": true,
+    "same_actual_gpu_capacity": true,
+    "cpu_mode": true,
+    "no_cpu_mode": true,
+    "gpu_prefix_caching_retained": true,
+    "no_cpu_connector_disabled": true,
+    "service_sets_correct": true,
+    "both_cold": true,
+    "both_accepted": true,
+    "all_requests_matched": true
+  },
+  "comparison_passed": true,
+  "repeats_verified": false,
+  "rows": [
+    {
+      "path": "runs/cpu_cache_ablation/probe-cpu-01",
+      "baseline": "native_lru_cpu_cache",
+      "successful_requests": 5,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "retrieved_tokens": 4096,
+      "prefill_kv_computed_tokens_delta": 16400.0,
+      "prefix_hit_tokens_delta": 0.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.2849504699997851,
+      "ttft_p95_s": 0.30934984539962895,
+      "latency_p50_s": 0.7500808150007288,
+      "latency_p95_s": 0.7760570103999271,
+      "wall_time_s": 6.0257617740007845
+    },
+    {
+      "path": "runs/cpu_cache_ablation/probe-no-cpu-01",
+      "baseline": "native_lru_no_cpu_cache",
+      "successful_requests": 5,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 0,
+      "retrieved_tokens": null,
+      "prefill_kv_computed_tokens_delta": 20496.0,
+      "prefix_hit_tokens_delta": 0.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.26107659499939473,
+      "ttft_p95_s": 0.522775915600323,
+      "latency_p50_s": 0.6818372689995158,
+      "latency_p95_s": 0.9421422868002991,
+      "wall_time_s": 6.251535884999612
+    }
+  ],
+  "paired_effect": {
+    "cpu_requests": 5,
+    "no_cpu_requests": 5,
+    "matched_requests": 5,
+    "cpu_restore_request_count": 1,
+    "note": "Groups are identified by CPU-run restores. Closed-loop interleaving may differ; matched requests need not have identical GPU hit/miss status.",
+    "all_ttft_s": {
+      "samples": 5,
+      "cpu_p50": 0.2849504699997851,
+      "no_cpu_p50": 0.26107659499939473,
+      "median_no_cpu_minus_cpu": -0.022933478999220824,
+      "mean_no_cpu_minus_cpu": 0.08235725720005575
+    },
+    "all_request_latency_s": {
+      "samples": 5,
+      "cpu_p50": 0.7500808150007288,
+      "no_cpu_p50": 0.6818372689995158,
+      "median_no_cpu_minus_cpu": -0.06771744799971202,
+      "mean_no_cpu_minus_cpu": 0.04554367899982026
+    },
+    "cpu_restored_requests_ttft_s": {
+      "samples": 1,
+      "cpu_p50": 0.06424847200014483,
+      "no_cpu_p50": 0.2790793300000587,
+      "median_no_cpu_minus_cpu": 0.21483085799991386,
+      "mean_no_cpu_minus_cpu": 0.21483085799991386
+    },
+    "cpu_restored_requests_request_latency_s": {
+      "samples": 1,
+      "cpu_p50": 0.48462992500026303,
+      "no_cpu_p50": 0.6991608299995278,
+      "median_no_cpu_minus_cpu": 0.21453090499926475,
+      "mean_no_cpu_minus_cpu": 0.21453090499926475
+    }
+  },
+  "interpretation": "Positive no_cpu-minus-cpu latency differences favor the CPU-cache system; this includes connector overhead, not isolated transfer cost."
+}

@@ -1,0 +1,60 @@
+{
+  "attempted_requests": 5,
+  "successful_requests": 5,
+  "failed_requests": 0,
+  "expected_requests": 5,
+  "completed_contexts": 1,
+  "wall_time_s": 6.0226701960000355,
+  "ttft_p50_s": 0.2850101919998451,
+  "ttft_p95_s": 0.30571971860003944,
+  "latency_p50_s": 0.7507377700001143,
+  "latency_p95_s": 0.7715997767999397,
+  "probe_a_repeat": {
+    "session_id": "probe",
+    "step": 4,
+    "label": "A_repeat",
+    "prompt_sha256": "f2bb948002b9b22d5766431d5bbb1959e657ec7593d2f9a75cbbae3acd7cebb8",
+    "ok": true,
+    "client_queue_s": 1.0435000149300322e-05,
+    "start_s": 5.2356225180001275,
+    "request_latency_s": 0.4851876349998747,
+    "ttft_s": 0.06566562900002282,
+    "prompt_tokens": 4112,
+    "completion_tokens": 32,
+    "cached_tokens": null,
+    "finish_reason": "length",
+    "request_id": "cmpl-b03b12df7500ccc2",
+    "retrieved_tokens": 4096,
+    "end_s": 6.021903183000177
+  },
+  "baseline": "native_lru_cpu_cache",
+  "workload_sha256": "8b16fb08e7732c4cd46255e7a7832be0ecdf2d0795e142319377fe9ff4c28d4f",
+  "gpu_kv_bytes": 268435456,
+  "gpu_capacity_tokens": 9360,
+  "cpu_cache_bytes": 4294967296,
+  "retrieved_tokens": 4096,
+  "preemptions_delta": 0.0,
+  "prefix_hit_tokens_delta": 0.0,
+  "eviction_count": null,
+  "transfer_bytes": null,
+  "lru_order_verified": false,
+  "unmeasured": [
+    "eviction_count",
+    "transfer_bytes",
+    "exact_block_eviction_order"
+  ],
+  "note": "Client TTFT includes HTTP, queueing, restore/prefill. Latency percentiles use successful requests only.",
+  "cumulative_block_upper_tokens": 20656,
+  "pusher_tokens": 12288,
+  "probe_unique_tokens": 16400,
+  "acceptance": {
+    "passed": true,
+    "checks": {
+      "all_requests_successful": true,
+      "no_active_request_preemption": true,
+      "pushers_exceed_gpu_capacity": true,
+      "a_repeat_restored": true
+    },
+    "note": "Restoration under pressure is not a measurement of exact block LRU order."
+  }
+}

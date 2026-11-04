@@ -1,0 +1,16 @@
+{
+  "cold_start": true,
+  "stopped": "2026-10-27T00:29:47.430068+00:00",
+  "services": [
+    {
+      "name": "vllm",
+      "pid": 6143,
+      "exit_code": 0
+    },
+    {
+      "name": "lmcache",
+      "pid": 6095,
+      "exit_code": 130
+    }
+  ]
+}

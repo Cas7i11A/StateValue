@@ -1,0 +1,11 @@
+{
+  "cold_start": true,
+  "stopped": "2026-10-27T01:35:58.136672+00:00",
+  "services": [
+    {
+      "name": "vllm",
+      "pid": 12615,
+      "exit_code": 0
+    }
+  ]
+}

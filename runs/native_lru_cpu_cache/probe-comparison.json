@@ -1,0 +1,56 @@
+{
+  "baseline": "native_lru_cpu_cache",
+  "checks": {
+    "matched_inputs_and_settings": true,
+    "different_gpu_budgets": true,
+    "both_cold_started": true,
+    "small_accepted": true,
+    "large_accepted": true,
+    "small_restored": true,
+    "more_restore_under_small_budget": true
+  },
+  "comparison_passed": true,
+  "repeatability_verified": false,
+  "baseline_acceptance_complete": false,
+  "rows": [
+    {
+      "path": "runs/native_lru_cpu_cache/probe-small-02",
+      "successful_requests": 5,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.2850101919998451,
+      "ttft_p95_s": 0.30571971860003944,
+      "latency_p50_s": 0.7507377700001143,
+      "latency_p95_s": 0.7715997767999397,
+      "wall_time_s": 6.0226701960000355,
+      "retrieved_tokens": 4096,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    },
+    {
+      "path": "runs/native_lru_cpu_cache/probe-large-02",
+      "successful_requests": 5,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 12884901888,
+      "gpu_capacity_tokens": 449376,
+      "cpu_cache_bytes": 4294967296,
+      "ttft_p50_s": 0.2835330969999177,
+      "ttft_p95_s": 0.29613915320010165,
+      "latency_p50_s": 0.7499893229999088,
+      "latency_p95_s": 0.7624343351999869,
+      "wall_time_s": 5.983729208000113,
+      "retrieved_tokens": 0,
+      "preemptions_delta": 0.0,
+      "eviction_count": null,
+      "transfer_bytes": null
+    }
+  ],
+  "limitations": [
+    "Exact block LRU order is not verified",
+    "Eviction count and transfer bytes are unmeasured",
+    "Synthetic token contents; scaled source lengths; client TTFT is not pure restore time"
+  ]
+}

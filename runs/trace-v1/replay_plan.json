@@ -1,0 +1,1900 @@
+{
+  "schema_version": 1,
+  "workload": "trace_gap_closed_loop",
+  "source_dataset": "harvardMadsys/freeinference_agentic_trace",
+  "source_license": "CC-BY-4.0",
+  "sources": [
+    {
+      "path": "data/freeinference/2026-05-17.jsonl.zst",
+      "sha256": "f768c3a44d6c7eb02340adcb7bceaf5a451e20dc568d7a96d69f78bfb70e09a8"
+    }
+  ],
+  "selection": {
+    "mode": "segments",
+    "unit": "tool_chain_segment",
+    "source_records": 25,
+    "contributing_source_records": 25,
+    "eligible_sessions": 119,
+    "selected_sessions": 32,
+    "omitted_by_limit": 87,
+    "excluded": {},
+    "excluded_transitions": {
+      "not_serial_tool_chain": 125,
+      "model_or_provider_change": 1
+    }
+  },
+  "note": "Synthetic contents and lengths; observed request gaps are not isolated tool runtimes.",
+  "sessions": [
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-0-2",
+      "source_start_ms": 1778977459236,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 8.025,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 4.863,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 0.0
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-3-4",
+      "source_start_ms": 1778983453676,
+      "steps": [
+        {
+          "source_step": 3,
+          "gap_after_s": 6.729,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 4,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 5994.44
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-5-10",
+      "source_start_ms": 1778983503634,
+      "steps": [
+        {
+          "source_step": 5,
+          "gap_after_s": 6.001,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 6,
+          "gap_after_s": 3.895,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 7,
+          "gap_after_s": 2.351,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 8,
+          "gap_after_s": 1.928,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 9,
+          "gap_after_s": 7.345,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 10,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 6044.398
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-11-13",
+      "source_start_ms": 1778983622190,
+      "steps": [
+        {
+          "source_step": 11,
+          "gap_after_s": 6.612,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 12,
+          "gap_after_s": 2.556,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 13,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 6162.954
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-14-25",
+      "source_start_ms": 1778983812723,
+      "steps": [
+        {
+          "source_step": 14,
+          "gap_after_s": 12.029,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 15,
+          "gap_after_s": 10.218,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops",
+            "*Search"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 16,
+          "gap_after_s": 3.985,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*Search",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 17,
+          "gap_after_s": 183.483,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "Other"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 18,
+          "gap_after_s": 2.134,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 19,
+          "gap_after_s": 1.331,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 20,
+          "gap_after_s": 1.637,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 21,
+          "gap_after_s": 3.63,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 22,
+          "gap_after_s": 3.699,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "Other"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 23,
+          "gap_after_s": 1.835,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 24,
+          "gap_after_s": 19.413,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 25,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 6353.487
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-27-47",
+      "source_start_ms": 1778985007033,
+      "steps": [
+        {
+          "source_step": 27,
+          "gap_after_s": 11.212,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter",
+            "*File Ops"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 28,
+          "gap_after_s": 2.282,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 29,
+          "gap_after_s": 3.543,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 30,
+          "gap_after_s": 1.36,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 31,
+          "gap_after_s": 2.479,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 32,
+          "gap_after_s": 3.446,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 33,
+          "gap_after_s": 2.617,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 34,
+          "gap_after_s": 2.268,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 35,
+          "gap_after_s": 3.362,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 36,
+          "gap_after_s": 2.779,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 37,
+          "gap_after_s": 2.579,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 38,
+          "gap_after_s": 1.815,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 39,
+          "gap_after_s": 2.569,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 40,
+          "gap_after_s": 2.709,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 41,
+          "gap_after_s": 2.665,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 42,
+          "gap_after_s": 2.664,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 43,
+          "gap_after_s": 7.706,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 44,
+          "gap_after_s": 2.353,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 45,
+          "gap_after_s": 2.241,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 46,
+          "gap_after_s": 7.759,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 47,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 7547.797
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-49-67",
+      "source_start_ms": 1778985435734,
+      "steps": [
+        {
+          "source_step": 49,
+          "gap_after_s": 12.575,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter",
+            "*File Ops"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 50,
+          "gap_after_s": 2.399,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 51,
+          "gap_after_s": 2.945,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*Interpreter"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 52,
+          "gap_after_s": 8.637,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 53,
+          "gap_after_s": 2.447,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 54,
+          "gap_after_s": 2.469,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 55,
+          "gap_after_s": 1.497,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 56,
+          "gap_after_s": 1.318,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 57,
+          "gap_after_s": 1.391,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 58,
+          "gap_after_s": 2.504,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 59,
+          "gap_after_s": 4.285,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 60,
+          "gap_after_s": 2.858,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 61,
+          "gap_after_s": 2.434,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 62,
+          "gap_after_s": 3.467,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 63,
+          "gap_after_s": 4.526,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 64,
+          "gap_after_s": 2.451,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 65,
+          "gap_after_s": 1.979,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 66,
+          "gap_after_s": 10.348,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 67,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 7976.498
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-69-73",
+      "source_start_ms": 1778985716425,
+      "steps": [
+        {
+          "source_step": 69,
+          "gap_after_s": 5.894,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 70,
+          "gap_after_s": 1.869,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 71,
+          "gap_after_s": 2.064,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 72,
+          "gap_after_s": 8.307,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 73,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 8257.189
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-75-81",
+      "source_start_ms": 1778985815934,
+      "steps": [
+        {
+          "source_step": 75,
+          "gap_after_s": 11.359,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter"
+          ],
+          "tool_count": 4
+        },
+        {
+          "source_step": 76,
+          "gap_after_s": 2.368,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 77,
+          "gap_after_s": 3.686,
+          "tool_category": "*Network",
+          "tool_categories": [
+            "*Network"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 78,
+          "gap_after_s": 4.483,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 79,
+          "gap_after_s": 1.914,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 80,
+          "gap_after_s": 11.639,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 81,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 8356.698
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-83-84",
+      "source_start_ms": 1778986173228,
+      "steps": [
+        {
+          "source_step": 83,
+          "gap_after_s": 7.649,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 84,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 8713.992
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-85-86",
+      "source_start_ms": 1778986700437,
+      "steps": [
+        {
+          "source_step": 85,
+          "gap_after_s": 7.175,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*Interpreter"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 86,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 9241.201
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-87-88",
+      "source_start_ms": 1778990313985,
+      "steps": [
+        {
+          "source_step": 87,
+          "gap_after_s": 9.391,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 88,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 12854.749
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-89-90",
+      "source_start_ms": 1778999979950,
+      "steps": [
+        {
+          "source_step": 89,
+          "gap_after_s": 6.377,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 90,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 22520.714
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd:steps-91-92",
+      "source_start_ms": 1779000154846,
+      "steps": [
+        {
+          "source_step": 91,
+          "gap_after_s": 6.271,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 92,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:3a59be967709fe17d6ab40b5d0ed18fd",
+      "arrival_offset_s": 22695.61
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-0-3",
+      "source_start_ms": 1779001582930,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 5.272,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "Other",
+            "Other"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 3.509,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "Other"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": 2.175,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 3,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 24123.694
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:f2596e5c2a1514f1f09faee30b4f6f60:steps-0-4",
+      "source_start_ms": 1779001930973,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 3.633,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 12.55,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": 8.51,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 3,
+          "gap_after_s": 16.129,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 4,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:f2596e5c2a1514f1f09faee30b4f6f60",
+      "arrival_offset_s": 24471.737
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:f2596e5c2a1514f1f09faee30b4f6f60:steps-5-33",
+      "source_start_ms": 1779002158095,
+      "steps": [
+        {
+          "source_step": 5,
+          "gap_after_s": 31.217,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 6,
+          "gap_after_s": 4.861,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 7,
+          "gap_after_s": 6.775,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 8,
+          "gap_after_s": 0.795,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 9,
+          "gap_after_s": 2.779,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 10,
+          "gap_after_s": 0.635,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 11,
+          "gap_after_s": 9.661,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 12,
+          "gap_after_s": 4.928,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 13,
+          "gap_after_s": 4.107,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 14,
+          "gap_after_s": 30.525,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 15,
+          "gap_after_s": 0.567,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 16,
+          "gap_after_s": 9.712,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 17,
+          "gap_after_s": 0.594,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 18,
+          "gap_after_s": 13.459,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 19,
+          "gap_after_s": 9.121,
+          "tool_category": "*Search",
+          "tool_categories": [
+            "*Search"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 20,
+          "gap_after_s": 0.621,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 21,
+          "gap_after_s": 3.863,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 22,
+          "gap_after_s": 6.012,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 23,
+          "gap_after_s": 30.658,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 24,
+          "gap_after_s": 0.695,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 25,
+          "gap_after_s": 30.534,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 26,
+          "gap_after_s": 0.654,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 27,
+          "gap_after_s": 0.819,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 28,
+          "gap_after_s": 36.68,
+          "tool_category": "*Wait/Poll",
+          "tool_categories": [
+            "*Wait/Poll"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 29,
+          "gap_after_s": 0.754,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 30,
+          "gap_after_s": 10.788,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 31,
+          "gap_after_s": 11.839,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 32,
+          "gap_after_s": 2.046,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 33,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:f2596e5c2a1514f1f09faee30b4f6f60",
+      "arrival_offset_s": 24698.859
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-4-9",
+      "source_start_ms": 1779003931168,
+      "steps": [
+        {
+          "source_step": 4,
+          "gap_after_s": 4.653,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "Other",
+            "Other"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 5,
+          "gap_after_s": 2.976,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 6,
+          "gap_after_s": 4.841,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 7,
+          "gap_after_s": 5.064,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 8,
+          "gap_after_s": 3.426,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 9,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 26471.932
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-10-11",
+      "source_start_ms": 1779006102866,
+      "steps": [
+        {
+          "source_step": 10,
+          "gap_after_s": 4.797,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 11,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 28643.63
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-12-13",
+      "source_start_ms": 1779008571000,
+      "steps": [
+        {
+          "source_step": 12,
+          "gap_after_s": 4.665,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 13,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 31111.764
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-14-15",
+      "source_start_ms": 1779010178314,
+      "steps": [
+        {
+          "source_step": 14,
+          "gap_after_s": 5.677,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 15,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 32719.078
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-16-17",
+      "source_start_ms": 1779012370633,
+      "steps": [
+        {
+          "source_step": 16,
+          "gap_after_s": 5.365,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 17,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 34911.397
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:f25672f2106cbed59ce7baac001cb6d4:steps-0-2",
+      "source_start_ms": 1779014101437,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 2.739,
+          "tool_category": "*Interpreter",
+          "tool_categories": [
+            "*Interpreter"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 3.671,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "*File Ops"
+          ],
+          "tool_count": 2
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:f25672f2106cbed59ce7baac001cb6d4",
+      "arrival_offset_s": 36642.201
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd:steps-0-1",
+      "source_start_ms": 1779018068851,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 5.847,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd",
+      "arrival_offset_s": 40609.615
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd:steps-2-13",
+      "source_start_ms": 1779018155024,
+      "steps": [
+        {
+          "source_step": 2,
+          "gap_after_s": 4.903,
+          "tool_category": "Browser",
+          "tool_categories": [
+            "Browser"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 3,
+          "gap_after_s": 20.739,
+          "tool_category": "*Git/VCS",
+          "tool_categories": [
+            "*Git/VCS"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 4,
+          "gap_after_s": 19.291,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 5,
+          "gap_after_s": 17.765,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 6,
+          "gap_after_s": 16.229,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 7,
+          "gap_after_s": 15.6,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 8,
+          "gap_after_s": 18.695,
+          "tool_category": "*Git/VCS",
+          "tool_categories": [
+            "*Git/VCS"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 9,
+          "gap_after_s": 23.304,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 10,
+          "gap_after_s": 4.665,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 11,
+          "gap_after_s": 26.401,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 12,
+          "gap_after_s": 19.567,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 13,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd",
+      "arrival_offset_s": 40695.788
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd:steps-14-15",
+      "source_start_ms": 1779018417503,
+      "steps": [
+        {
+          "source_step": 14,
+          "gap_after_s": 5.251,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 15,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd",
+      "arrival_offset_s": 40958.267
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd:steps-16-23",
+      "source_start_ms": 1779018549875,
+      "steps": [
+        {
+          "source_step": 16,
+          "gap_after_s": 5.016,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 17,
+          "gap_after_s": 3.852,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 18,
+          "gap_after_s": 3.343,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 19,
+          "gap_after_s": 3.347,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 20,
+          "gap_after_s": 4.303,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 21,
+          "gap_after_s": 11.943,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 22,
+          "gap_after_s": 3.85,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 23,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:d3cf2b494fbb04a8d1850c2367f5fcdd",
+      "arrival_offset_s": 41090.639
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae:steps-18-19",
+      "source_start_ms": 1779020348024,
+      "steps": [
+        {
+          "source_step": 18,
+          "gap_after_s": 4.477,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 19,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:38fd82c2b2f4693bcb97a6be528dccae",
+      "arrival_offset_s": 42888.788
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:e73b3b255cafc05ad00715f050be5c74:steps-0-2",
+      "source_start_ms": 1779020391063,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 4.173,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 3.83,
+          "tool_category": "Read",
+          "tool_categories": [
+            "Read"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:e73b3b255cafc05ad00715f050be5c74",
+      "arrival_offset_s": 42931.827
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:e73b3b255cafc05ad00715f050be5c74:steps-3-4",
+      "source_start_ms": 1779020522218,
+      "steps": [
+        {
+          "source_step": 3,
+          "gap_after_s": 4.357,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 4,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:e73b3b255cafc05ad00715f050be5c74",
+      "arrival_offset_s": 43062.982
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:cd6aa3aae2c1fa416b83a42486dca980:steps-1-2",
+      "source_start_ms": 1779020794444,
+      "steps": [
+        {
+          "source_step": 1,
+          "gap_after_s": 3.102,
+          "tool_category": "Other",
+          "tool_categories": [
+            "Other"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:cd6aa3aae2c1fa416b83a42486dca980",
+      "arrival_offset_s": 43335.208
+    },
+    {
+      "session_id": "2026-05-17_2026-05-23:1c7a4900e8880549cacae1257d96949a:steps-0-4",
+      "source_start_ms": 1779020922261,
+      "steps": [
+        {
+          "source_step": 0,
+          "gap_after_s": 18.55,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "*File Ops",
+            "Read",
+            "Read"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 1,
+          "gap_after_s": 3.36,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "Read",
+            "Read",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "tool_count": 5
+        },
+        {
+          "source_step": 2,
+          "gap_after_s": 16.143,
+          "tool_category": "multiple",
+          "tool_categories": [
+            "Read",
+            "Read",
+            "Other"
+          ],
+          "tool_count": 3
+        },
+        {
+          "source_step": 3,
+          "gap_after_s": 14.87,
+          "tool_category": "*File Ops",
+          "tool_categories": [
+            "*File Ops"
+          ],
+          "tool_count": 1
+        },
+        {
+          "source_step": 4,
+          "gap_after_s": null,
+          "tool_category": null,
+          "tool_categories": [],
+          "tool_count": 0
+        }
+      ],
+      "source_session_id": "2026-05-17_2026-05-23:1c7a4900e8880549cacae1257d96949a",
+      "arrival_offset_s": 43463.025
+    }
+  ]
+}

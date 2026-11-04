@@ -1,0 +1,165 @@
+{
+  "comparison": "gpu_lru_cpu_cache_ablation",
+  "gpu_kv_bytes": 268435456,
+  "checks": {
+    "matched_workload_and_runtime": true,
+    "same_actual_gpu_capacity": true,
+    "cpu_mode": true,
+    "no_cpu_mode": true,
+    "gpu_prefix_caching_retained": true,
+    "no_cpu_connector_disabled": true,
+    "service_sets_correct": true,
+    "both_cold": true,
+    "both_accepted": true,
+    "all_requests_matched": true,
+    "cpu_repeat_matches": true,
+    "no_cpu_repeat_matches": true
+  },
+  "comparison_passed": true,
+  "repeats_verified": true,
+  "rows": [
+    {
+      "path": "runs/cpu_cache_ablation/trace-cpu-01",
+      "baseline": "native_lru_cpu_cache",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "retrieved_tokens": 22768,
+      "prefill_kv_computed_tokens_delta": 61234.0,
+      "prefix_hit_tokens_delta": 123872.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.04184589099986624,
+      "ttft_p95_s": 0.2777492217501276,
+      "latency_p50_s": 0.4586393634999695,
+      "latency_p95_s": 0.7448173097502604,
+      "wall_time_s": 85.92028588599987
+    },
+    {
+      "path": "runs/cpu_cache_ablation/trace-no-cpu-01",
+      "baseline": "native_lru_no_cpu_cache",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 0,
+      "retrieved_tokens": null,
+      "prefill_kv_computed_tokens_delta": 86418.0,
+      "prefix_hit_tokens_delta": 121456.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.036696185499749845,
+      "ttft_p95_s": 0.26168739649983763,
+      "latency_p50_s": 0.45207886549997056,
+      "latency_p95_s": 0.6852054962498642,
+      "wall_time_s": 85.89066638199984
+    },
+    {
+      "path": "runs/cpu_cache_ablation/trace-cpu-02",
+      "baseline": "native_lru_cpu_cache",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 4294967296,
+      "retrieved_tokens": 22768,
+      "prefill_kv_computed_tokens_delta": 61234.0,
+      "prefix_hit_tokens_delta": 123872.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.04199063650003154,
+      "ttft_p95_s": 0.2827949707498192,
+      "latency_p50_s": 0.4597557644997323,
+      "latency_p95_s": 0.7485367684998891,
+      "wall_time_s": 85.96445190899976
+    },
+    {
+      "path": "runs/cpu_cache_ablation/trace-no-cpu-02",
+      "baseline": "native_lru_no_cpu_cache",
+      "successful_requests": 106,
+      "failed_requests": 0,
+      "gpu_kv_bytes": 268435456,
+      "gpu_capacity_tokens": 9360,
+      "cpu_cache_bytes": 0,
+      "retrieved_tokens": null,
+      "prefill_kv_computed_tokens_delta": 86418.0,
+      "prefix_hit_tokens_delta": 121456.0,
+      "preemptions_delta": 0.0,
+      "ttft_p50_s": 0.035898828999506804,
+      "ttft_p95_s": 0.26330685974994594,
+      "latency_p50_s": 0.45135340300066673,
+      "latency_p95_s": 0.6864504570000918,
+      "wall_time_s": 85.8830756970001
+    }
+  ],
+  "paired_effect": {
+    "cpu_requests": 106,
+    "no_cpu_requests": 106,
+    "matched_requests": 106,
+    "cpu_restore_request_count": 40,
+    "note": "Groups are identified by CPU-run restores. Closed-loop interleaving may differ; matched requests need not have identical GPU hit/miss status.",
+    "all_ttft_s": {
+      "samples": 106,
+      "cpu_p50": 0.04184589099986624,
+      "no_cpu_p50": 0.036696185499749845,
+      "median_no_cpu_minus_cpu": -0.005478359000335331,
+      "mean_no_cpu_minus_cpu": 0.0008351635376198348
+    },
+    "all_request_latency_s": {
+      "samples": 106,
+      "cpu_p50": 0.4586393634999695,
+      "no_cpu_p50": 0.45207886549997056,
+      "median_no_cpu_minus_cpu": -0.009861484999873937,
+      "mean_no_cpu_minus_cpu": -0.0067977282358628625
+    },
+    "cpu_restored_requests_ttft_s": {
+      "samples": 40,
+      "cpu_p50": 0.04906459450012335,
+      "no_cpu_p50": 0.05141988550030874,
+      "median_no_cpu_minus_cpu": 0.007619499499924132,
+      "mean_no_cpu_minus_cpu": 0.015305891874868393
+    },
+    "cpu_restored_requests_request_latency_s": {
+      "samples": 40,
+      "cpu_p50": 0.4691564599997946,
+      "no_cpu_p50": 0.46925014150019706,
+      "median_no_cpu_minus_cpu": 0.0035579410005084355,
+      "mean_no_cpu_minus_cpu": 0.012153889674959829
+    }
+  },
+  "interpretation": "Positive no_cpu-minus-cpu latency differences favor the CPU-cache system; this includes connector overhead, not isolated transfer cost.",
+  "repeat_paired_effect": {
+    "cpu_requests": 106,
+    "no_cpu_requests": 106,
+    "matched_requests": 106,
+    "cpu_restore_request_count": 40,
+    "note": "Groups are identified by CPU-run restores. Closed-loop interleaving may differ; matched requests need not have identical GPU hit/miss status.",
+    "all_ttft_s": {
+      "samples": 106,
+      "cpu_p50": 0.04199063650003154,
+      "no_cpu_p50": 0.035898828999506804,
+      "median_no_cpu_minus_cpu": -0.006184289999964676,
+      "mean_no_cpu_minus_cpu": 0.000118704754743892
+    },
+    "all_request_latency_s": {
+      "samples": 106,
+      "cpu_p50": 0.4597557644997323,
+      "no_cpu_p50": 0.45135340300066673,
+      "median_no_cpu_minus_cpu": -0.009856196999407985,
+      "mean_no_cpu_minus_cpu": -0.007773288226339986
+    },
+    "cpu_restored_requests_ttft_s": {
+      "samples": 40,
+      "cpu_p50": 0.04859241000031034,
+      "no_cpu_p50": 0.05218980600011491,
+      "median_no_cpu_minus_cpu": 0.00830646250051359,
+      "mean_no_cpu_minus_cpu": 0.014887533150022137
+    },
+    "cpu_restored_requests_request_latency_s": {
+      "samples": 40,
+      "cpu_p50": 0.4697478179996324,
+      "no_cpu_p50": 0.47007256799997776,
+      "median_no_cpu_minus_cpu": 0.0023909424999146722,
+      "mean_no_cpu_minus_cpu": 0.011220489125025778
+    }
+  }
+}
